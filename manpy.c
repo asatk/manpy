@@ -41,8 +41,12 @@ int main(int argc, char** argv) {
     }
 
     cmd = (char *) malloc(BUFSIZE/2);
-    snprintf(cmd, BUFSIZE, "python -Ic \"import %s; print(%s.__doc__)\" | less\n",
-        module, object); 
+    snprintf(cmd, BUFSIZE,
+        "python -Ic \"import %s; print(%s.__doc__);\
+        print(\'\\nThe following are the attributes of %s:\\n\');\
+        print(dir(%s))\" | less\n",
+        module, object, object, object); 
+
 
     system(cmd);
 }
